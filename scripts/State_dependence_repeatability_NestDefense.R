@@ -8,7 +8,6 @@ library(arm)
 library(broom)
 library(tidyverse)
 require(moments)
-require(glmmTMB)
 require(e1071)
 
 #summary stats
@@ -87,7 +86,7 @@ Fig4+ facet_grid(~Year)
 
 
   #Score
-boxplot(Score~NestStage, data=data)
+boxplot(Score~NestStage, data=data) # the scoring limits the amount of variation possible b/n observations 
 boxplot(Score~Year, data=data)
 boxplot(Score~Sex, data=data)
 
@@ -159,6 +158,18 @@ histogram( ~ Score | NestStage , type = "count",
 #Transform
 data$Min<- -1*(log10(max(data$MinDis + 1)-data$MinDis))
 hist(data$Min)
+# Check histograms for normality after transformation
+histogram( ~ Min| NestStage , type = "count",
+           xlab = "Nest Defense Score",
+           ylab = "Frequency",
+           nint=30,layout=c(1,3),
+           strip.left = strip.custom(bg = 'white'),
+           strip = F,
+           col.line = "black", col = "white",
+           scales = list(x = list(relation = "same"),
+                         y = list(relation = "same"),
+                         draw = TRUE), data=data)
+
 
 #backtransform to original Min distance value
 data$Min1<- -1*(10^(max(data$Min) -data$Min)-0.9)
@@ -195,6 +206,7 @@ plot(m3, Min ~ fitted(.), abline = c(0,1)) #shows linear relationship
 
 #random effects histograms
 require(MCMCglmm)
+require(arm)
 hist(ranef(m3)$ID)#normally distributed
 hist(ranef(m3)$ID_Series)#normally distributed
 hist(ranef(m3)$SiteID, breaks= 5) #normally distributed
@@ -204,7 +216,7 @@ hist(ranef(m3)$SiteID, breaks= 5) #normally distributed
 #scale location plot
 plot(m3,  
      sqrt(abs(resid(.)))~fitted(.),
-     type=c("p","smooth"), col.line=1)
+     type=c("p","smooth"), col.line=1) # mostly horizontal line... homoscedasticity likely satisfied 
 
 
 
