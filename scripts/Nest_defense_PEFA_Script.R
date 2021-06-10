@@ -1,8 +1,4 @@
 
-# add some code here
-
-
-# test online edit
 
 #Aggression Scoring PCA----
 setwd("C:/Users/Nick/Desktop/PEFA/P")
