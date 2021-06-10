@@ -1,5 +1,4 @@
 
-
 #Aggression Scoring PCA----
 #setwd("C:/Users/Nick/Desktop/PEFA/P")
 data<-read.csv("data/nest_defense_pca.csv")
