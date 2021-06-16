@@ -1,6 +1,12 @@
 #wd
 setwd("C:/Users/nickg/OneDrive/Desktop/P")
 data<-read.csv("data/nest_defense_test_final.csv")
+install.packages("readr")
+require(readr)
+data<- read.csv("data/nest_defense_data_final.csv")
+View(nest_defense_data_final)
+
+
 library(lme4)
 library(performance)
 library(MASS)
