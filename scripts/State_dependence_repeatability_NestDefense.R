@@ -1,6 +1,6 @@
 #wd
 setwd("C:/Users/nickg/OneDrive/Desktop/P")
-data<-read.csv("nest_defense_test_final.csv")
+data<-read.csv("data/nest_defense_test_final.csv")
 library(lme4)
 library(performance)
 library(MASS)
